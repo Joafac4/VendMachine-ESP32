@@ -88,7 +88,7 @@ void showStock(int qty){
 
 }
 
-// Función que se ejecuta cuando se conecta al broker
+
 void callback(char* topic, byte* payload, unsigned int length) {
     Serial.println("Entro al callback");
     Serial.println(topic);
@@ -115,9 +115,9 @@ void callback(char* topic, byte* payload, unsigned int length) {
         if (error) {
             Serial.print("Error al deserializar JSON: ");
             Serial.println(error.c_str());
-            // Manejar el error según tus necesidades
+           
         } else {
-            // Acceder a la variable qty
+            
             String response = doc["_response"];
             Serial.print("response: ");
             Serial.println(response);
@@ -132,17 +132,14 @@ void callback(char* topic, byte* payload, unsigned int length) {
         if (error) {
             Serial.print("Error al deserializar JSON: ");
             Serial.println(error.c_str());
-            // Manejar el error según tus necesidades
+            
         } else {
-            // Acceder a la variable qty
+            
             int qty = doc["qty"];
             Serial.print("Cantidad: ");
             Serial.println(qty);
             int qty_int = doc["qty"].as<int>();
-           /* if (qty_int == 0)
-            {
-              handleLeds('b');
-            }*/
+           
             
             showStock(qty_int);
     }
